@@ -41,16 +41,12 @@ export default function Book(props) {
   useEffect(() => {
     if (!props.book && !book) router.push("/");
   }, [props.book, bookSearchResults, book, router]);
-
   // use fetch to call POST /api/book
   // Be sure to pass book in body (use JSON.stringify)
   // Call router.replace(router.asPath) if you receive a 200 status
   async function addToFavorites() {
     const res = await fetch("/api/book", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
       body: JSON.stringify(book),
     });
     if (res.status === 200) {
@@ -63,9 +59,6 @@ export default function Book(props) {
   async function removeFromFavorites() {
     const res = await fetch("/api/book", {
       method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
       body: JSON.stringify({ id: book.id }),
     });
     if (res.status === 200) {
